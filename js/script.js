@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const listItem = document.createElement("li");
             listItem.className = "container"
             listItem.innerHTML = 
-                "<div class='row' style='color: white; margin-bottom: 1.5rem'>" +
+                `<button class='row' style='width: 100%; background-color: transparent; border: none; color: white; margin-bottom: 1.5rem' type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">` +
                     "<div class='col-10'>" +
                         "<div class='row'>" +
                             pelicula.title +
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         "</div>" +
                     "</div>" +
                     "<div class='col'>" +
-                    crearElementoEstrellas(pelicula.vote_average).innerHTML +
+                        crearElementoEstrellas(pelicula.vote_average).innerHTML +
                     "</div>" +
                 "</div>"
             lista.append(listItem);
@@ -69,4 +69,18 @@ function crearElementoEstrellas(puntaje) {
         `<span class="fa fa-star ${(cantidadEstrellas >= 4)? "checked" : ""}"></span>`+
         `<span class="fa fa-star ${(cantidadEstrellas >= 5)? "checked" : ""}"></span>`
     return wrapper
+}
+
+function toggleContenedorSuperior() {
+    `<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Toggle top offcanvas</button>
+
+    <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasTopLabel">Offcanvas top</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        ...
+      </div>
+    </div>`
 }
