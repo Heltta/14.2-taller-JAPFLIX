@@ -36,10 +36,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const lista = document.getElementById("lista")
         lista.innerHTML = "";
         peliculasFiltradas.forEach((pelicula) => {
-            const listItem = document.createElement("li");
-            listItem.className = "container"
-            listItem.innerHTML = 
-                `<button class='row' style='width: 100%; background-color: transparent; border: none; color: white; margin-bottom: 1.5rem' type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">` +
+            const wrapperBtn = document.createElement("button");
+            wrapperBtn.id = id="card${pelicula.id}";
+            wrapperBtn.className = 'row';
+            wrapperBtn.style = 'width: 100%; background-color: transparent; border: none; color: white; margin-bottom: 1.5rem;';
+            wrapperBtn.type = "button";
+            wrapperBtn.dataset.bsToggle = "offcanvas";
+            wrapperBtn.dataset.bsTarget = "#offcanvasTop";
+            wrapperBtn.ariaControls = "offcanvasTop";
+            // `<button  data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">` +
+            wrapperBtn.innerHTML = 
                     "<div class='col-10'>" +
                         "<div class='row'>" +
                             pelicula.title +
@@ -50,8 +56,19 @@ document.addEventListener("DOMContentLoaded", () => {
                     "</div>" +
                     "<div class='col'>" +
                         crearElementoEstrellas(pelicula.vote_average).innerHTML +
-                    "</div>" +
-                "</div>"
+                    "</div>";
+            wrapperBtn.addEventListener("click", ()=>{
+                const listaGeneros = []
+                pelicula.genres.forEach(genero => {
+                    listaGeneros.push(genero.name);
+                })
+                setContenidoOffCanvas(pelicula.title, pelicula.overview, listaGeneros)
+            })
+
+            // wrapper list item
+            const listItem = document.createElement("li");
+            listItem.className = "container"
+            listItem.append(wrapperBtn);
             lista.append(listItem);
         })
 
@@ -60,7 +77,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function crearElementoEstrellas(puntaje) {
     const wrapper = document.createElement("div");
-    const asdf = ``
     const cantidadEstrellas = Math.round(puntaje/2)
     wrapper.innerHTML =
         `<span class="fa fa-star ${(cantidadEstrellas >= 1)? "checked" : ""}"></span>`+
@@ -71,16 +87,8 @@ function crearElementoEstrellas(puntaje) {
     return wrapper
 }
 
-function toggleContenedorSuperior() {
-    `<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Toggle top offcanvas</button>
-
-    <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasTopLabel">Offcanvas top</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-        ...
-      </div>
-    </div>`
+function setContenidoOffCanvas(title, overview, listaGenres) {
+   document.getElementById("offcanvasTopLabel").innerHTML = title;
+   document.getElementById("descripcionPeli").innerHTML = overview;
+   document.getElementById("listaGenerosPeli").innerHTML = listaGenres;
 }
