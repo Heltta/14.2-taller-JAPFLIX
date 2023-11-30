@@ -62,7 +62,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 pelicula.genres.forEach(genero => {
                     listaGeneros.push(genero.name);
                 })
-                setContenidoOffCanvas(pelicula.title, pelicula.overview, listaGeneros)
+                setContenidoOffCanvas(
+                    pelicula.title,
+                    pelicula.overview,
+                    listaGeneros,
+                    pelicula.release_date,               
+                    pelicula.runtime,               
+                    pelicula.budget,
+                    pelicula.revenue
+                    );
             })
 
             // wrapper list item
@@ -87,8 +95,16 @@ function crearElementoEstrellas(puntaje) {
     return wrapper
 }
 
-function setContenidoOffCanvas(title, overview, listaGenres) {
-   document.getElementById("offcanvasTopLabel").innerHTML = title;
-   document.getElementById("descripcionPeli").innerHTML = overview;
-   document.getElementById("listaGenerosPeli").innerHTML = listaGenres;
+function setContenidoOffCanvas(title, overview, listaGenres, release_date,
+    runtime,
+    budget,
+    revenue) {
+    document.getElementById("offcanvasTopLabel").innerHTML = title;
+    document.getElementById("descripcionPeli").innerHTML = overview;
+    document.getElementById("listaGenerosPeli").innerHTML = listaGenres;
+    document.getElementById("dropDownData-release_date").innerHTML = (new Date(release_date)).getFullYear();
+    document.getElementById("dropDownData-runtime").innerHTML = runtime;
+    document.getElementById("dropDownData-budget").innerHTML = budget;
+    document.getElementById("dropDownData-revenue").innerHTML = revenue;
+
 }

@@ -21,7 +21,20 @@
       </div>
       <div class="offcanvas-body" id="descripcionPeli"></div>
       <hr/>
-      <div class="offcanvas-body" id="listaGenerosPeli"></div>
+      <div class="offcanvas-body d-flex flex-row justify-content-between" style="overflow: visible;">
+        <div id="listaGenerosPeli"></div>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown button
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Año: <span id="dropDownData-release_date"></span></a></li>
+            <li><a class="dropdown-item" href="#">Duracion: <span id="dropDownData-runtime"> mins.</span></a></li>
+            <li><a class="dropdown-item" href="#">Budget $<span id="dropDownData-budget"></span></a></li>
+            <li><a class="dropdown-item" href="#">Revenue $<span id="dropDownData-revenue"></span></a></li>
+          </ul>
+        </div>
+      </div>
     </div>
   </header>
 
